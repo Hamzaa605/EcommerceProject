@@ -27,4 +27,8 @@ public class User {
 	@Column(nullable = false)
 	private int age;
 	
+	// class extends class
+	// class implements interface
+	// interface extends interface
+	
 }

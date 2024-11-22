@@ -20,7 +20,7 @@ public interface UserService {
 	UserDto updateUser(String id,UserDto userDto);
 	
 	// delete user by Id
-	UserDto deleteUser(String id);
+	String deleteUser(String id);
 
 	// Entity to Dto conversion
 	UserDto entityToDto(User user);

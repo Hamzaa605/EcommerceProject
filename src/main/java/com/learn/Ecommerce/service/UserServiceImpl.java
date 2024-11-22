@@ -2,6 +2,8 @@ package com.learn.Ecommerce.service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,14 +36,21 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<UserDto> getAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		List<User> users = userRepository.findAll();
+		  List<UserDto> userDtoList = users.stream()
+				                     .map(u->entityToDto(u))
+		                             .collect(Collectors.toList());
+		  
+		return userDtoList;
 	}
 
 	@Override
 	public UserDto getUserById(String id) {
+		
+		User orElseThrow = userRepository.findById(id)
+				.orElseThrow(()->new RuntimeException(id +"not found"));
 		// TODO Auto-generated method stub
-		return null;
+		return entityToDto(orElseThrow);
 	}
 
 	@Override
@@ -51,9 +60,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto deleteUser(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public String deleteUser(String id) {
+		User users = userRepository.findById(id)
+				    .orElseThrow(()->new RuntimeException(id+" not found"));
+		
+		userRepository.delete(users);
+		return users.getId()+"Deleted successfully";
 	}
 
 	@Override

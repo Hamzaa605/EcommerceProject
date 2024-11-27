@@ -1,5 +1,7 @@
 package com.learn.Ecommerce.Dto;
 
+import com.learn.Ecommerce.validators.PasswordMatch;
+
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@PasswordMatch
 //Dto = data transfer object
 public class UserDto {
 

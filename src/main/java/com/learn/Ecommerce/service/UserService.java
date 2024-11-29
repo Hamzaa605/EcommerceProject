@@ -27,4 +27,12 @@ public interface UserService {
 	
 	// DTO to entity conversion
 	User dtoToEntity(UserDto userDto);
+
+    // To fetch user by email 
+	UserDto getUserByEmailId(String emailId);
+	
+	  // To fetch user by first name
+	List<UserDto> getUserByFirstName(String firstName);
+
+	
 }

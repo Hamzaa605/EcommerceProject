@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learn.Ecommerce.Dto.UserDto;
@@ -26,6 +27,7 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	private UserDto userDto;
 	
 	//  POST ["/users"] to add user
 	@PostMapping
@@ -45,6 +47,13 @@ public class UserController {
 	  return new ResponseEntity<UserDto>(userDto,HttpStatus.FOUND);
 	}
 	
+	@GetMapping("find-by-email/{emailId}")
+	public ResponseEntity<UserDto> getUserEmailId(@PathVariable String emailId)
+	{		 
+		return new ResponseEntity<UserDto>
+		(userService.getUserByEmailId(emailId),HttpStatus.FOUND);
+	}
+	
 	// GET ["/user"] to fetch all users
 	@GetMapping("/allusers")
 	public ResponseEntity<List<UserDto>>  fetchAllUser()
@@ -61,5 +70,13 @@ public class UserController {
 		String msg = userService.deleteUser(id);
 		
 		return new ResponseEntity<String>(msg,HttpStatus.OK);
+	}
+	
+	@GetMapping("find-by-firstname")
+	public ResponseEntity<List<UserDto>> getUserByFirstName(@RequestParam String fname)
+	{
+           List<UserDto> FirstName = userService.getUserByFirstName(fname);
+		
+		return new ResponseEntity<List<UserDto>>(FirstName,HttpStatus.OK);
 	}
 }

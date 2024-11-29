@@ -95,6 +95,25 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 	
+	@Override
+	public UserDto getUserByEmailId(String emailId) {
+		
+		User user= userRepository.findByEmailId(emailId)
+				.orElseThrow(()->new RuntimeException(emailId +"not found"));
+		// TODO Auto-generated method stub
+		return entityToDto(user);
+	}
+
+	@Override
+	public List<UserDto> getUserByFirstName(String firstName) {
+		List<User> listed = userRepository.findByFirstNmae(firstName);
+		List<UserDto> user = listed.stream()
+                .map(f->entityToDto(f))
+                .collect(Collectors.toList());
+		return user;
+	}
+	
+	
 	
 	
 }

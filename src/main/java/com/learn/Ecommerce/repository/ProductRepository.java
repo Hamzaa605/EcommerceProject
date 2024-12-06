@@ -3,9 +3,12 @@ package com.learn.Ecommerce.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+import com.learn.Ecommerce.Projection.ProductProjection;
 import com.learn.Ecommerce.entity.Product;
 
+@RepositoryRestResource(excerptProjection = ProductProjection.class)
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
 //http://localhost:8080/products/search/findByProductPriceLessThan?price=50000
@@ -26,4 +29,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
 	
 	List<Product> findByProductNameStartingWith(String productName);
+	
+	
 }
